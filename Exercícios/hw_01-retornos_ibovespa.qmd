@@ -1,0 +1,78 @@
+---
+title: "hw_01-retornos_ibovespa"
+format: html
+editor: visual
+---
+
+# Exercício: Análise dos Retornos Diários do IBOVESPA
+
+Neste exercício, você deverá realizar uma análise dos retornos diários do IBOVESPA, utilizando técnicas de estatística descritiva e visualização de dados.
+
+## Tarefas
+1. Importe uma base de dados com os preços diários de fechamento do índice IBOVESPA (disponível em diversas fontes, como o Yahoo Finance).
+2. Calcule os retornos diários com base nos preços de fechamento.
+3. Realize a análise descritiva dos retornos, incluindo:
+   - Média
+   - Mediana
+   - Desvio padrão
+   - Assimetria
+   - Curtose
+4. Crie gráficos que permitam visualizar o comportamento dos retornos:
+   - Histograma dos retornos.
+   - Boxplot dos retornos.
+   - Gráfico de linha dos preços de fechamento ao longo do tempo.
+
+## Requisitos
+- Utilize a linguagem de programação R ou Python para resolver o exercício.
+- Em Python, recomenda-se o uso das bibliotecas `pandas`, `matplotlib` e `numpy`.
+- Em R, recomenda-se o uso das bibliotecas `tidyverse` e `ggplot2`.
+
+## Código de início em R
+
+```{r,  warning = FALSE, message = FALSE}
+library(ggplot2)
+library(dplyr)
+library(gt)
+library(tidyverse)
+library(scales)
+library(moments)
+library(quantmod)
+library(plotly)
+
+# Importar dados do IBOVESPA
+getSymbols("^BVSP", src = "yahoo", from = "2017-01-01", to = Sys.Date())
+
+ibovespa_data <- as.data.frame(BVSP) %>%
+  mutate(data = index(BVSP)) %>%
+  select(data, BVSP.Close) %>%
+  mutate(retorno = (BVSP.Close / lag(BVSP.Close) - 1) * 100) %>%
+  na.omit()
+
+head(ibovespa_data)
+```
+
+## Código de início em Python
+
+```{python, message = FALSE, warning = FALSE}
+
+try:
+    import yfinance as yf
+except ImportError:
+    import subprocess
+    subprocess.check_call(["pip", "install", "yfinance"])
+    import yfinance as yf
+    
+ibovespa_data = yf.download('^BVSP', start='2017-01-01')
+
+ibovespa_data = ibovespa_data[['Close']].copy()
+ibovespa_data['retorno'] = ibovespa_data['Close'].pct_change() * 100
+
+ibovespa_data = ibovespa_data.reset_index()
+
+ibovespa_data = ibovespa_data.dropna()
+
+print(ibovespa_data.head())
+```
+
+
+
