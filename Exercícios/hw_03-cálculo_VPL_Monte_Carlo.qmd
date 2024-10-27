@@ -1,0 +1,83 @@
+---
+title: "Simulação de Monte Carlo e Cálculo do VPL"
+author: "Victor Schmidt Comitti"
+format: html
+editor: visual
+---
+
+# Contexto
+
+## Valor Presente Líquido (VPL)
+
+O Valor Presente Líquido (VPL) é uma métrica financeira utilizada para avaliar a viabilidade de um projeto de investimento. Ele representa a soma dos fluxos de caixa futuros, descontados a uma taxa específica, menos o investimento inicial. O VPL é amplamente utilizado em finanças para determinar se um projeto gerará valor ao longo do tempo. Se o VPL for positivo, significa que o projeto é lucrativo.
+
+A fórmula para o VPL é:
+
+$$ VPL = \sum_{t=1}^{n} \frac{FC_t}{(1+r)^t} - I_0 $$
+
+Onde:
+- \( FC_t \) é o fluxo de caixa no período \( t \)
+- \( r \) é a taxa de desconto
+- \( I_0 \) é o investimento inicial
+
+## Simulação de Monte Carlo
+
+A Simulação de Monte Carlo é uma técnica estatística usada para modelar a incerteza em processos de decisão. Ela envolve a realização de experimentos aleatórios repetidos para simular a variabilidade dos possíveis resultados de um evento ou processo. No contexto do cálculo de VPL, podemos usar a Simulação de Monte Carlo para modelar a incerteza nos fluxos de caixa futuros, assumindo que seguem uma distribuição de probabilidade específica (por exemplo, Normal).
+
+# Tarefa
+
+### Objetivo
+
+Você deve calcular a probabilidade de um projeto de investimento gerar um VPL positivo usando a técnica de Simulação de Monte Carlo.
+
+### Descrição
+
+Considere um projeto de investimento onde os fluxos de caixa anuais seguem uma distribuição Normal, conforme os parâmetros indicados na tabela abaixo. O investimento inicial é de 500 unidades monetárias e a taxa de desconto é de 10%. Utilize Simulação de Monte Carlo para estimar a probabilidade de o VPL ser positivo.
+
+ Ano | Média do Fluxo de Caixa | Desvio Padrão |
+|-----|-------------------------|---------------|
+| 1   | 100                     | 20            |
+| 2   | 150                     | 30            |
+| 3   | 120                     | 25            |
+| 4   | 200                     | 40            |
+| 5   | 180                     | 35            |
+
+### Instruções
+
+1. **Monte Carlo**: Simule 10.000 cenários para os fluxos de caixa de cada ano, considerando que eles seguem distribuições Normais com as médias e desvios padrão fornecidos.
+   
+2. **Cálculo do VPL**: Para cada cenário simulado, calcule o VPL do projeto.
+
+3. **Probabilidade**: Calcule a proporção de cenários onde o VPL é positivo. Esta proporção representa a probabilidade de o projeto ser lucrativo.
+
+4. **Visualização**: Plote o histograma dos VPLs simulados e destaque a região onde o VPL é maior que zero.
+
+### Exemplo em R considerando apenas tres fluxos de caixa
+
+```{r}
+# Parâmetros
+n_simulacoes <- 10000
+taxa_desconto <- 0.10
+investimento_inicial <- 500
+
+# Definir as distribuições dos fluxos de caixa
+fluxo_ano1 <- rnorm(n_simulacoes, mean = 100, sd = 20)
+fluxo_ano2 <- rnorm(n_simulacoes, mean = 150, sd = 30)
+fluxo_ano3 <- rnorm(n_simulacoes, mean = 200, sd = 40)
+
+# Calcular o VPL para cada simulação
+VPL <- (fluxo_ano1 / (1 + taxa_desconto)^1) + 
+       (fluxo_ano2 / (1 + taxa_desconto)^2) + 
+       (fluxo_ano3 / (1 + taxa_desconto)^3) - 
+       investimento_inicial
+
+# Calcular a probabilidade de o VPL ser positivo
+prob_vpl_positivo <- mean(VPL > 0)
+cat('Probabilidade de VPL positivo:', prob_vpl_positivo, '\n')
+
+# Visualizar o histograma dos VPLs
+hist(VPL, breaks = 50, main = "Distribuição dos VPLs Simulados", 
+     xlab = "VPL", col = "lightblue", border = "black")
+abline(v = 0, col = "red", lwd = 2)
+```
+

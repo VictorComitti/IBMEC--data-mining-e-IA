@@ -1,0 +1,59 @@
+---
+title: "hw_05 - Imputação de dados"
+format: html
+editor: visual
+author: "Victor Schmidt Comitti"
+---
+
+## Instruções
+
+ - Carregue o banco de dados 'iris'.
+ - Gere dados faltantes aleatoriamente na variável ‘Sepal.length’. Agora use as técnicas de imputação mostradas para preencher esses dados faltantes. Compare os valores obtidos com os valores reais.
+ 
+## Início do código em R
+
+```{r, eval = FALSE}
+library(car)
+library(dplyr)
+library(skimr)
+library(ggplot2)
+library(gridExtra)
+library(corrplot)
+library(Hmisc)
+library(mice)
+library(missForest)
+
+set.seed(09092024)
+
+data(iris)
+
+# a linha abaixo gera observações NA aleatoriamente na variável Sepal.Lenght
+
+iris$Sepal.Length[sample(1:nrow(iris), 0.15 * nrow(iris))] <- NA
+```
+
+## Início do código em Python 
+
+```{python, eval = FALSE}
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+import missingno as msno
+from sklearn.impute import SimpleImputer
+from sklearn.experimental import enable_iterative_imputer
+from sklearn.impute import IterativeImputer
+
+# Definir a seed
+np.random.seed(9092024)
+
+# Carregar o dataset iris (usando seaborn para carregar)
+iris = sns.load_dataset('iris')
+
+# A linha abaixo gera observações NA aleatoriamente na variável 'sepal_length'
+iris.loc[np.random.choice(iris.index, int(0.15 * len(iris))), 'sepal_length'] = np.nan
+
+# Visualizar as primeiras linhas
+print(iris.head())
+```
+

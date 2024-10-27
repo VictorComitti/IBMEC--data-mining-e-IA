@@ -1,0 +1,53 @@
+---
+title: "hw_02: Análise de Sobrevivência de Passageiros do Titanic"
+author: "Victor Schmidt Comitti"
+format: html
+editor: visual
+---
+
+## Tarefas
+
+1. **Importe a base de dados**: Carregue a base de dados do Titanic, que contém informações sobre passageiros, como classe, sexo, idade e se sobreviveram ou não ao naufrágio.
+   
+2. **Calcule as probabilidades marginais e condicionais**:
+   - Qual a probabilidade de uma pessoa ter sobrevivido?
+   - Qual a probabilidade de uma pessoa ter sobrevivido, dado que era mulher?
+   - Qual a probabilidade de uma pessoa ter sobrevivido, dado que estava na primeira classe?
+   
+3. **Teorema de Bayes**:
+   - Usando o teorema de Bayes, calcule a probabilidade de um passageiro estar na primeira classe, dado que ele sobreviveu.
+
+4. **Visualização**:
+   - Crie gráficos para visualizar a distribuição de sobreviventes por sexo e por classe.
+
+```{r, eval = FALSE}
+library(titanic)
+library(dplyr)
+
+# Carregar a base de dados do Titanic
+data("titanic_train")
+titanic_data <- titanic_train
+
+# Calcular a probabilidade de sobrevivência
+p_survived <- mean(titanic_data$Survived)
+cat('Probabilidade de sobreviver:', p_survived, '\n')
+```
+
+
+## Código de início em Python
+
+```{r, eval = FALSE}
+import seaborn as sns
+import pandas as pd
+
+# Carregar a base de dados do Titanic
+titanic_data = sns.load_dataset('titanic')
+
+# Visualizar os primeiros dados
+print(titanic_data.head())
+
+# Calcular a probabilidade de sobrevivência
+p_survived = titanic_data['survived'].mean()
+print(f'Probabilidade de sobreviver: {p_survived:.2f}')
+```
+

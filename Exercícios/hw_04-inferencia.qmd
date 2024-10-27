@@ -1,0 +1,93 @@
+---
+title: "hw_04 -  Taxa de desemprego no Brasil"
+format: html
+author: "Victor Schmidt Comitti"
+editor: visual
+---
+
+## Contexto
+
+Você foi encarregado de realizar uma análise sobre a taxa de desemprego no Brasil utilizando dados reais da Pesquisa Nacional por Amostra de Domicílios Contínua (PNAD Contínua), disponibilizados pelo IBGE. Seu objetivo é testar se a taxa de desemprego média nos últimos 36 meses está significativamente acima de 10%.
+
+## Dados
+
+Abaixo estão as taxas de desemprego dos últimos 36 meses no Brasil:
+
+```{r, echo = FALSE}
+# Criar a tabela de dados dos últimos 36 meses
+library(knitr)
+taxa_desemprego <- data.frame(
+  Mes = c("Jan-21", "Feb-21", "Mar-21", "Apr-21", "May-21", "Jun-21", 
+          "Jul-21", "Aug-21", "Sep-21", "Oct-21", "Nov-21", "Dec-21", 
+          "Jan-22", "Feb-22", "Mar-22", "Apr-22", "May-22", "Jun-22", 
+          "Jul-22", "Aug-22", "Sep-22", "Oct-22", "Nov-22", "Dec-22", 
+          "Jan-23", "Feb-23", "Mar-23", "Apr-23", "May-23", "Jun-23", 
+          "Jul-23", "Aug-23", "Sep-23", "Oct-23"),
+  Taxa = c(14.2, 14.4, 14.7, 14.8, 14.6, 14.1, 13.7, 13.2, 12.6, 12.1, 
+           11.6, 11.1, 11.0, 10.8, 10.5, 10.2, 10.0, 9.8, 9.5, 9.3, 
+           9.0, 8.7, 8.6, 8.5, 8.4, 8.3, 8.1, 8.0, 7.9, 7.7, 7.6, 7.5, 
+           7.3, 7.2)
+)
+kable(taxa_desemprego, col.names = c("Mês", "Taxa de Desemprego (%)"))
+```
+
+## Instruções
+
+1. **Carregue os dados no R**:
+
+   Utilize os dados fornecidos na tabela acima para análise.
+
+2. **Formule a hipótese nula (H0) e a hipótese alternativa (H1)**:
+
+   - $H_0$ A taxa de desemprego média é $\mu = 10\%$  
+   - $H_1$: A taxa de desemprego média é $\mu > 10\%$ (teste unilateral)
+
+3. **Construa um intervalo de confiança de 95%** para a taxa de desemprego média no período.
+
+4. **Realize um teste de hipótese**:
+
+   Use um teste t de uma amostra (t-test) para verificar se a taxa de desemprego média é significativamente maior que 10%.  
+   Nível de significância: 5%
+
+5. **Interprete os resultados**:
+
+   - O intervalo de confiança sugere que a taxa média de desemprego é significativamente diferente de 10%?
+   - O teste de hipótese permite rejeitar a hipótese nula?
+
+6. **Conclusão**:
+
+   Com base nos resultados, discuta se o governo ou outras instituições devem revisar sua percepção sobre a taxa de desemprego no Brasil.
+
+## Início da solução em R
+
+```{r, eval = FALSE}
+library(dplyr)
+
+# Dados de taxa de desemprego
+taxa_desemprego <- c(9.5, 10.2, 11.1, 10.5, 9.8, 10.7, 11.3, 10.1, 
+                     10.6, 9.9, 10.8, 11.0, 10.4, 10.2, 10.9, 11.2,
+                     10.5, 10.3, 10.1, 9.7, 10.4, 10.6, 11.5, 10.8,
+                     9.9, 10.2, 10.7, 11.0, 10.4, 10.3, 10.8, 10.6,
+                     9.5, 10.0, 10.3, 11.1)
+
+# Calcular a média e o desvio padrão
+media <- mean(taxa_desemprego)
+desvio_padrao <- sd(taxa_desemprego)
+```
+
+## Início da solução em Python
+
+```{python, eval = FALSE}
+# Importar bibliotecas necessárias
+import numpy as np
+import scipy.stats as stats
+
+# Dados de taxa de desemprego
+taxa_desemprego = np.array([9.5, 10.2, 11.1, 10.5, 9.8, 10.7, 11.3, 10.1, 
+                             10.6, 9.9, 10.8, 11.0, 10.4, 10.2, 10.9, 11.2,
+                             10.5, 10.3, 10.1, 9.7, 10.4, 10.6, 11.5, 10.8,
+                             9.9, 10.2, 10.7, 11.0, 10.4, 10.3, 10.8, 10.6,
+                             9.5, 10.0, 10.3, 11.1])
+
+```
+
