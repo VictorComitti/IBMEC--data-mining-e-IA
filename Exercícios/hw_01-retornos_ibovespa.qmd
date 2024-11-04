@@ -2,6 +2,7 @@
 title: "hw_01-retornos_ibovespa"
 format: html
 editor: visual
+self-contained: true
 ---
 
 # Exercício: Análise dos Retornos Diários do IBOVESPA

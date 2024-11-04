@@ -3,6 +3,7 @@ title: "hw_04 -  Taxa de desemprego no Brasil"
 format: html
 author: "Victor Schmidt Comitti"
 editor: visual
+self-contained: true
 ---
 
 ## Contexto

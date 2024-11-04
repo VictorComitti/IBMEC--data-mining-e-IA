@@ -3,6 +3,7 @@ title: "Simulação de Monte Carlo e Cálculo do VPL"
 author: "Victor Schmidt Comitti"
 format: html
 editor: visual
+self-contained: true
 ---
 
 # Contexto

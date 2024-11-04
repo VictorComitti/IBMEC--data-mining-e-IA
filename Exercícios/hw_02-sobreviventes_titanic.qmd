@@ -3,6 +3,7 @@ title: "hw_02: Análise de Sobrevivência de Passageiros do Titanic"
 author: "Victor Schmidt Comitti"
 format: html
 editor: visual
+self-contained: true
 ---
 
 ## Tarefas

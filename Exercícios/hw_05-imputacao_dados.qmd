@@ -3,6 +3,7 @@ title: "hw_05 - Imputação de dados"
 format: html
 editor: visual
 author: "Victor Schmidt Comitti"
+self-contained: true
 ---
 
 ## Instruções
